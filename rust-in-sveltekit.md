@@ -1,3 +1,7 @@
+---
+tags: [rust, sveltekit, svelte, webassembly, wasm, wasm-pack, netlify]
+---
+
 # How to do WebAssembly with Rust in a SvelteKit project
 
 In this blog post I'm going to take you on a journey where I tried to connect WebAssembly with Rust to my Sveltekit project. I made this journey in December of last year (as of this writing) when I was doing some code challenges with [Advent of Code](https://adventofcode.com/) and decided to make a [Sveltekit website](https://adventofcode2022-tice-sveltekit.netlify.app/) and make them in there. Initially I decided for Javascript (Typescript), a language I'm very familiar with as I've been developing with it for 4 years professionally.
@@ -126,10 +130,10 @@ Of course these 2 commands were pointing to 2 scripts in `package.json` which we
 
 ```json
 "scripts": {
-  ...
+  //...
   "rust:build": "wasm-pack build src/rust --target web",
   "remove-rust-gitignore": "rm src/rust/pkg/.gitignore && git add src/rust/pkg",
-  ...
+  //...
 }
 ```
 
@@ -141,9 +145,9 @@ So it's almost almost perfect. We got a nice build flow, and as we're using Svel
 
 ```json
 "scripts": {
-  ...
+  //...
   "rust:dev": "cd src/rust && cargo watch -i .gitignore -i \"pkg/*\" -s \"wasm-pack build --target web\"",
-  ...
+  //...
 }
 ```
 
@@ -151,7 +155,7 @@ So it'd `cd` into the rust crate folder, and watch the files, ignoring `.gitigno
 
 And of course, as developers we are lazy, I made a `dev:all` command, which would start an [overmind](https://github.com/DarthSim/overmind) process with the SvelteKit dev server and this watcher, the `Procfile` ended up like this:
 
-```
+```yml
 web: pnpm dev
 rust: pnpm rust:dev
 ```
